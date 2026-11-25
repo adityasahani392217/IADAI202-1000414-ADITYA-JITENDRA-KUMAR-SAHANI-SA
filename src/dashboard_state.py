@@ -1,4 +1,4 @@
-"""Shared cached data loading, global sidebar filtering, and aggregate resolution."""
+"""Shared cached data loading, persistent global sidebar filtering, and aggregate resolution."""
 
 from __future__ import annotations
 
@@ -47,6 +47,16 @@ DASHBOARD_COLUMNS = [
     "charge_to_cost_ratio",
 ]
 
+FILTER_STATE_KEYS = (
+    "flt_year",
+    "flt_county",
+    "flt_facility",
+    "flt_age",
+    "flt_gender",
+    "flt_severity",
+    "flt_mdc",
+)
+
 
 @st.cache_data(show_spinner="Loading MediScope AI inpatient dataset...")
 def get_dashboard_dataframe() -> tuple[pd.DataFrame, str]:
@@ -85,56 +95,95 @@ def _cat_options(series: pd.Series, ordered_ref: list[str] | None = None) -> lis
     return sorted(opts)
 
 
+def _init_persistent_filter_state(years: list[int]) -> None:
+    """Restore persisted filter values into widget keys so page switches never drop selections."""
+    saved = st.session_state.setdefault("_saved_filters", {})
+    for key in FILTER_STATE_KEYS:
+        if key not in st.session_state:
+            if key == "flt_year":
+                st.session_state[key] = saved.get(key, list(years))
+            else:
+                st.session_state[key] = list(saved.get(key, []))
+
+
+def _persist_filter_state() -> None:
+    """Sync current widget filter selections into non-widget session storage."""
+    saved = st.session_state.setdefault("_saved_filters", {})
+    for key in FILTER_STATE_KEYS:
+        if key in st.session_state:
+            saved[key] = list(st.session_state[key])
+
+
 def _reset_filters() -> None:
-    """Clear all global sidebar filter keys in Streamlit session_state."""
-    for key in (
-        "flt_year",
-        "flt_county",
-        "flt_facility",
-        "flt_age",
-        "flt_gender",
-        "flt_severity",
-        "flt_mdc",
-    ):
+    """Reset all global sidebar filter keys cleanly."""
+    st.session_state["_saved_filters"] = {}
+    for key in FILTER_STATE_KEYS:
         if key in st.session_state:
             del st.session_state[key]
 
 
+def build_filter_summary_text(filtered_count: int) -> str | None:
+    """Return a readable string describing active filters, or None if unfiltered."""
+    parts: list[str] = []
+    label_map = [
+        ("flt_county", "County"),
+        ("flt_facility", "Facility"),
+        ("flt_age", "Age"),
+        ("flt_gender", "Gender"),
+        ("flt_severity", "Severity"),
+        ("flt_mdc", "Category"),
+    ]
+    for key, label in label_map:
+        vals = st.session_state.get(key) or []
+        if vals:
+            shown = ", ".join(str(v) for v in vals[:2])
+            if len(vals) > 2:
+                shown += f" +{len(vals) - 2} more"
+            parts.append(f"{label}: {shown}")
+    if not parts:
+        return None
+    return " | ".join(parts) + f" — Showing {filtered_count:,} records"
+
+
 def apply_global_filters(df: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, bool]:
-    """Render global sidebar filters and return (filtered_df, filters_active)."""
+    """Render persistent global sidebar filters and return (filtered_df, filters_active)."""
+    years = sorted(df["discharge_year"].dropna().unique().tolist())
+    _init_persistent_filter_state(years)
+
+    # Sanitize year selection against valid options
+    st.session_state["flt_year"] = [
+        y for y in (st.session_state.get("flt_year") or years) if y in years
+    ] or list(years)
+
     with st.sidebar:
-        st.markdown("### MediScope AI")
-        st.caption("Hospital Inpatient Analytics & LOS Platform")
-
         if mode == "full_local":
-            st.success(f"Full Local Dataset ({len(df):,} rows)")
+            st.success(f"Full Local Data: {len(df):,} rows")
         else:
-            st.info(
-                f"Cloud Mode: Pre-aggregated 2.09M metrics + {len(df):,}-row stratified sample"
-            )
+            st.info(f"Cloud Mode: 2.09M Aggregates + {len(df):,} Sample")
 
-        st.divider()
         st.markdown("#### Global Filters")
 
-        if st.button("Reset All Filters", width="stretch"):
+        if st.button("Reset All Filters", width="stretch", key="btn_reset_global_filters"):
             _reset_filters()
             st.rerun()
 
-        years = sorted(df["discharge_year"].dropna().unique().tolist())
         sel_years = st.multiselect(
             "Discharge Year",
             options=years,
-            default=years,
             key="flt_year",
-            help="2021 SPARCS De-Identified Inpatient Discharges",
+            on_change=_persist_filter_state,
+            help="2021 NYS SPARCS Inpatient Discharges",
         )
 
         counties = _cat_options(df["hospital_county"])
+        st.session_state["flt_county"] = [
+            c for c in st.session_state.get("flt_county", []) if c in counties
+        ]
         sel_counties = st.multiselect(
             "Hospital County",
             options=counties,
-            default=[],
             key="flt_county",
+            on_change=_persist_filter_state,
             placeholder="All counties",
         )
 
@@ -144,11 +193,15 @@ def apply_global_filters(df: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, boo
         else:
             facilities = _cat_options(df["facility_name"])
 
+        # Sanitize facility selection when county filter narrows options
+        st.session_state["flt_facility"] = [
+            f for f in st.session_state.get("flt_facility", []) if f in facilities
+        ]
         sel_facilities = st.multiselect(
             "Facility Name",
             options=facilities,
-            default=[],
             key="flt_facility",
+            on_change=_persist_filter_state,
             placeholder="All facilities",
         )
 
@@ -156,8 +209,8 @@ def apply_global_filters(df: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, boo
         sel_ages = st.multiselect(
             "Age Group",
             options=age_opts,
-            default=[],
             key="flt_age",
+            on_change=_persist_filter_state,
             placeholder="All age groups",
         )
 
@@ -165,8 +218,8 @@ def apply_global_filters(df: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, boo
         sel_genders = st.multiselect(
             "Gender",
             options=gender_opts,
-            default=[],
             key="flt_gender",
+            on_change=_persist_filter_state,
             placeholder="All genders",
         )
 
@@ -174,8 +227,8 @@ def apply_global_filters(df: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, boo
         sel_sevs = st.multiselect(
             "Illness Severity",
             options=sev_opts,
-            default=[],
             key="flt_severity",
+            on_change=_persist_filter_state,
             placeholder="All severity levels",
         )
 
@@ -183,10 +236,12 @@ def apply_global_filters(df: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, boo
         sel_mdcs = st.multiselect(
             "Diagnosis Category (MDC)",
             options=mdc_opts,
-            default=[],
             key="flt_mdc",
+            on_change=_persist_filter_state,
             placeholder="All diagnostic categories",
         )
+
+        _persist_filter_state()
 
     filters_active = bool(
         (sel_years and len(sel_years) < len(years))
@@ -230,6 +285,31 @@ def apply_global_filters(df: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, boo
                 file_name="mediscope_filtered_discharges.csv",
                 mime="text/csv",
                 width="stretch",
+                key="btn_download_filtered_csv",
             )
 
+    # Cache active slice in session_state for pages running inside st.navigation shell
+    st.session_state["_active_filtered_df"] = filtered
+    st.session_state["_active_filters_flag"] = filters_active
+    st.session_state["_active_data_mode"] = mode
+    st.session_state["_active_filter_summary"] = (
+        build_filter_summary_text(len(filtered)) if filters_active else None
+    )
     return filtered, filters_active
+
+
+def get_page_context() -> tuple[pd.DataFrame, bool, str, str | None]:
+    """Return (filtered_df, filters_active, mode, filter_summary_text) safely in both shell and standalone modes."""
+    if st.session_state.get("_nav_shell_active") and "_active_filtered_df" in st.session_state:
+        return (
+            st.session_state["_active_filtered_df"],
+            bool(st.session_state.get("_active_filters_flag", False)),
+            str(st.session_state.get("_active_data_mode", "cloud_sample")),
+            st.session_state.get("_active_filter_summary"),
+        )
+
+    # Standalone page execution fallback (e.g., direct AppTest on pages/*.py)
+    df, mode = get_dashboard_dataframe()
+    filtered_df, filters_active = apply_global_filters(df, mode)
+    summary_text = build_filter_summary_text(len(filtered_df)) if filters_active else None
+    return filtered_df, filters_active, mode, summary_text

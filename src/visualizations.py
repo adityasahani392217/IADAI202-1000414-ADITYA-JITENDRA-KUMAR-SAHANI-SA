@@ -128,30 +128,26 @@ def plot_top_volume_diagnoses(diag_df: pd.DataFrame, top_n: int = 12) -> go.Figu
 def plot_charges_boxplot_by_severity(
     df: pd.DataFrame,
     use_log_scale: bool = True,
-    max_points_per_group: int = 4000,
+    max_points_per_group: int = 1500,
 ) -> go.Figure:
     """Compulsory Chart 2: Interactive Box Plot of Total Charges Segmented by Severity.
 
-    Note: Uses stratified downsampling only if a group exceeds `max_points_per_group`
-    so the browser stays responsive while accurately preserving quartiles/outliers.
+    Uses fast quantile-preserving sampling when a group exceeds `max_points_per_group`
+    so browser rendering stays responsive while keeping whiskers and top outliers exact.
     """
     sev_present = [s for s in SEVERITY_ORDER if s in set(df["apr_severity_description"].astype(str))]
     plot_parts = []
     for sev in sev_present:
-        sub = df[df["apr_severity_description"].astype(str) == sev][
-            ["apr_severity_description", "total_charges"]
+        sub = df.loc[
+            df["apr_severity_description"] == sev,
+            ["apr_severity_description", "total_charges"],
         ]
         if len(sub) > max_points_per_group:
-            # Always preserve top/bottom extremes alongside random core sample for faithful whiskers/outliers
-            n_tail = min(200, len(sub) // 10)
-            sorted_sub = sub.sort_values("total_charges")
-            low_tail = sorted_sub.iloc[:n_tail]
-            high_tail = sorted_sub.iloc[-n_tail:]
-            mid = sorted_sub.iloc[n_tail:-n_tail].sample(
-                n=min(max_points_per_group - 2 * n_tail, len(sorted_sub) - 2 * n_tail),
-                random_state=42,
-            )
-            sub = pd.concat([low_tail, mid, high_tail], ignore_index=True)
+            n_tail = min(100, len(sub) // 10)
+            low_tail = sub.nsmallest(n_tail, "total_charges")
+            high_tail = sub.nlargest(n_tail, "total_charges")
+            core = sub.sample(n=max_points_per_group - 2 * n_tail, random_state=42)
+            sub = pd.concat([low_tail, core, high_tail], ignore_index=True)
         plot_parts.append(sub)
 
     plot_df = pd.concat(plot_parts, ignore_index=True) if plot_parts else df

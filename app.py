@@ -1,4 +1,4 @@
-"""MediScope AI — Main Streamlit Application Entry Point."""
+"""MediScope AI — Main Streamlit Application Shell with Persistent Navigation & Filters."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="MediScope AI | Hospital Inpatient Analytics",
-    page_icon="🏥",
+    page_icon="assets/mediscope_icon.svg",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -15,32 +15,37 @@ from src.dashboard_state import (
     apply_global_filters,
     get_dashboard_dataframe,
     get_full_eda_summary,
+    get_page_context,
 )
 from src.eda import compute_core_kpis
 from src.utils import (
+    LOGO_ICON_PATH,
+    LOGO_SIDEBAR_PATH,
     format_currency,
     format_number,
     inject_custom_css,
+    render_active_filter_banner,
     render_kpi_card,
     render_page_header,
+    render_plain_english_guide,
 )
 
 
-def main() -> None:
-    inject_custom_css()
-    df, mode = get_dashboard_dataframe()
-    filtered_df, filters_active = apply_global_filters(df, mode)
+def render_home_page() -> None:
+    """Render the MediScope AI landing hub and executive launchpad."""
+    filtered_df, filters_active, mode, filter_summary = get_page_context()
 
     mode_label = (
         "Full Local Dataset (2.09M Records)"
         if mode == "full_local"
-        else "Cloud Ready (2.09M Pre-Aggregated + 80K Sample)"
+        else "Cloud Mode (2.09M Pre-Aggregated + 80K Sample)"
     )
     render_page_header(
         "MediScope AI — Inpatient Discharge & Length-of-Stay Intelligence",
         "New York State SPARCS De-Identified Inpatient Analytics Platform (2021)",
         mode_label=mode_label,
     )
+    render_active_filter_banner(filter_summary)
 
     if filtered_df.empty:
         st.warning(
@@ -49,10 +54,7 @@ def main() -> None:
         return
 
     summary = get_full_eda_summary()
-    if not filters_active and summary:
-        kpis = summary["kpis"]
-    else:
-        kpis = compute_core_kpis(filtered_df)
+    kpis = summary["kpis"] if (not filters_active and summary) else compute_core_kpis(filtered_df)
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
@@ -63,7 +65,7 @@ def main() -> None:
         )
     with c2:
         render_kpi_card(
-            "Length of Stay (Mean / Median)",
+            "Avg vs. Typical Stay (Mean / Median)",
             f"{kpis['avg_los']:.2f}d / {kpis['median_los']:.1f}d",
             f"Range: {int(kpis['min_los'])}–{int(kpis['max_los'])} days",
             navy=True,
@@ -72,44 +74,71 @@ def main() -> None:
         render_kpi_card(
             "Average Hospital Charges",
             format_currency(kpis["avg_charges"]),
-            f"Median: {format_currency(kpis['median_charges'])}",
+            f"Typical (Median): {format_currency(kpis['median_charges'])}",
         )
     with c4:
         render_kpi_card(
-            "Facilities & Counties",
+            "Hospitals & Counties",
             f"{kpis['unique_facilities']} / {kpis['unique_counties']}",
             f"Avg Cost/Day: {format_currency(kpis['avg_cost_per_day'])}",
             navy=True,
         )
 
-    st.markdown("### Platform Modules")
-    st.markdown(
-        "Navigate across MediScope AI's eight analytical and machine-learning workspaces using the sidebar or the quick links below:"
+    render_plain_english_guide(
+        "Quick Guide to MediScope AI",
+        "Use the persistent <strong>Global Filters</strong> on the left sidebar to slice data by county, hospital, age, gender, illness severity, or diagnosis category—your filters stay active across every analytics page. "
+        "Note that <strong>Median</strong> represents the typical patient stay (3 days), while <strong>Mean</strong> (5.75 days) is higher because complex ICU, oncology, and behavioral health stays extend for weeks.",
     )
 
+    st.markdown("### Explore Platform Modules")
     col_a, col_b = st.columns(2)
     with col_a:
-        st.page_link("pages/1_Overview.py", label="1. Executive Overview — KPIs & Executive Summary", icon="📊")
-        st.page_link("pages/2_Diagnosis_Analytics.py", label="2. Diagnosis Analytics — Stay Duration & Volume by CCSR", icon="🩺")
-        st.page_link("pages/3_Financial_Analytics.py", label="3. Financial Analytics — Severity Box Plots, Costs & Demographics", icon="💳")
-        st.page_link("pages/4_Hospital_Performance.py", label="4. Hospital Performance — Facility × County Heatmap", icon="🏥")
+        st.page_link("pages/1_Overview.py", label="1. Executive Overview — Key Hospital Metrics & Summary", icon="📊")
+        st.page_link("pages/2_Diagnosis_Analytics.py", label="2. Diagnosis Analytics — Longest Stays & Top Conditions", icon="🩺")
+        st.page_link("pages/3_Financial_Analytics.py", label="3. Financial Analytics — Charges by Severity, Age & Gender", icon="💳")
+        st.page_link("pages/4_Hospital_Performance.py", label="4. Hospital Performance — Facility × County Stay Heatmap", icon="🏥")
     with col_b:
-        st.page_link("pages/5_Payment_Analytics.py", label="5. Payment Analytics — Payer Mix Pie Chart & Comparisons", icon="🧾")
-        st.page_link("pages/6_Length_of_Stay.py", label="6. Length of Stay — Distribution & Skewness Analysis", icon="⏱️")
-        st.page_link("pages/7_ML_Performance.py", label="7. ML Performance — Model Benchmarks, Residuals & Fairness", icon="📈")
-        st.page_link("pages/8_LOS_Predictor.py", label="8. Length of Stay Predictor — Interactive Patient Forecast", icon="🤖")
+        st.page_link("pages/5_Payment_Analytics.py", label="5. Payment Analytics — Insurance Mix & Payer Costs", icon="🧾")
+        st.page_link("pages/6_Length_of_Stay.py", label="6. Length of Stay — Stay Duration Curve & Severity Breakdown", icon="⏱️")
+        st.page_link("pages/7_ML_Performance.py", label="7. ML Performance — Model Accuracy, Residuals & Fairness", icon="📈")
+        st.page_link("pages/8_LOS_Predictor.py", label="8. Length of Stay Predictor — Interactive Bed-Day Forecast", icon="🤖")
 
     st.markdown(
         """
         <div class="insight-box">
-            <strong>Governance & Clinical Disclaimer:</strong> All analytics are derived from de-identified
-            2021 New York State SPARCS inpatient discharge records. Predictive Length of Stay estimates are
-            provided solely for operational capacity planning and resource forecasting—not for individual
-            clinical diagnosis or treatment decisions.
+            <strong>Governance & Clinical Disclaimer:</strong> All analytics use de-identified
+            2021 New York State SPARCS inpatient records. Predicted Length of Stay values support
+            hospital bed capacity and staffing planning only—never individual clinical decisions.
         </div>
         """,
         unsafe_allow_html=True,
     )
+
+
+def main() -> None:
+    inject_custom_css()
+    if LOGO_SIDEBAR_PATH.exists() and LOGO_ICON_PATH.exists():
+        st.logo(str(LOGO_SIDEBAR_PATH), icon_image=str(LOGO_ICON_PATH))
+
+    # Mark shell active so subpages reuse persistent filters and skip duplicate page_config
+    st.session_state["_nav_shell_active"] = True
+
+    df, mode = get_dashboard_dataframe()
+    apply_global_filters(df, mode)
+
+    pages = [
+        st.Page(render_home_page, title="Home", icon="🏠", default=True),
+        st.Page("pages/1_Overview.py", title="1. Executive Overview", icon="📊"),
+        st.Page("pages/2_Diagnosis_Analytics.py", title="2. Diagnosis Analytics", icon="🩺"),
+        st.Page("pages/3_Financial_Analytics.py", title="3. Financial Analytics", icon="💳"),
+        st.Page("pages/4_Hospital_Performance.py", title="4. Hospital Performance", icon="🏥"),
+        st.Page("pages/5_Payment_Analytics.py", title="5. Payment Analytics", icon="🧾"),
+        st.Page("pages/6_Length_of_Stay.py", title="6. Length of Stay", icon="⏱️"),
+        st.Page("pages/7_ML_Performance.py", title="7. ML Performance", icon="📈"),
+        st.Page("pages/8_LOS_Predictor.py", title="8. LOS Predictor", icon="🤖"),
+    ]
+    nav = st.navigation(pages)
+    nav.run()
 
 
 if __name__ == "__main__":

@@ -5,16 +5,18 @@ from __future__ import annotations
 import plotly.express as px
 import streamlit as st
 
-st.set_page_config(page_title="Hospital Performance | MediScope AI", page_icon="🏥", layout="wide")
+if not st.session_state.get("_nav_shell_active"):
+    st.set_page_config(page_title="Hospital Performance | MediScope AI", page_icon="🏥", layout="wide")
 
 from src.config import PALETTE
-from src.dashboard_state import (
-    apply_global_filters,
-    get_dashboard_dataframe,
-    get_preaggregated_table,
-)
+from src.dashboard_state import get_page_context, get_preaggregated_table
 from src.eda import summarize_facility_county
-from src.utils import inject_custom_css, render_page_header
+from src.utils import (
+    inject_custom_css,
+    render_active_filter_banner,
+    render_page_header,
+    render_plain_english_guide,
+)
 from src.visualizations import (
     _apply_mediscope_layout,
     plot_county_utilisation,
@@ -23,18 +25,27 @@ from src.visualizations import (
 
 
 def main() -> None:
-    inject_custom_css()
-    df, mode = get_dashboard_dataframe()
-    filtered_df, filters_active = apply_global_filters(df, mode)
+    if not st.session_state.get("_nav_shell_active"):
+        inject_custom_css()
+
+    filtered_df, filters_active, _, filter_summary = get_page_context()
 
     render_page_header(
         "Hospital & County Performance (RQ4)",
-        "Facility-level utilisation, county inpatient volume, emergency share, and stay-duration benchmarks.",
+        "Facility utilisation, regional inpatient bed-days, emergency admission share, and average stay benchmarks.",
     )
+    render_active_filter_banner(filter_summary)
 
     if filtered_df.empty:
         st.warning("No discharge records match the selected filters.")
         return
+
+    render_plain_english_guide(
+        "Interpreting Hospital Stay Benchmarks",
+        "Darker navy cells in the heatmap indicate longer average patient stays. Switch <em>Select Top Facilities By</em> to "
+        "<strong>Longest Average Stay</strong> to see why specialty rehabilitation, palliative, and psychiatric centers average 15–46 days, "
+        "whereas high-volume acute medical centers average 4–7 days.",
+    )
 
     if not filters_active:
         fac_county_df = get_preaggregated_table("agg_facility_county.parquet")
@@ -55,7 +66,6 @@ def main() -> None:
             format_func=lambda x: "Highest Discharge Volume" if x == "discharges" else "Longest Average Stay",
         )
 
-    # Compulsory Chart 3: Heatmap of Average Stay Duration by Facility and County
     st.plotly_chart(
         plot_facility_county_heatmap(
             fac_county_df,
@@ -63,12 +73,12 @@ def main() -> None:
             top_n_counties=top_counties,
             sort_by=rank_metric,
         ),
-        width='stretch',
+        width="stretch",
     )
 
     c1, c2 = st.columns(2)
     with c1:
-        st.plotly_chart(plot_county_utilisation(fac_county_df, top_n=15), width='stretch')
+        st.plotly_chart(plot_county_utilisation(fac_county_df, top_n=15), width="stretch")
     with c2:
         top_vol = fac_county_df.head(25)
         fig_ed = px.scatter(
@@ -84,15 +94,15 @@ def main() -> None:
         fig_ed.update_coloraxes(colorbar_title="ED %")
         _apply_mediscope_layout(
             fig_ed,
-            "Top 25 Facilities: Volume vs. Avg Stay & Emergency Share (%)",
+            "Top 25 Facilities: Volume vs. Avg Stay & ED Share (%)",
             xaxis_title="Total Discharges",
             yaxis_title="Average Length of Stay (Days)",
             height=430,
         )
-        st.plotly_chart(fig_ed, width='stretch')
+        st.plotly_chart(fig_ed, width="stretch")
 
     st.markdown("#### Facility Utilisation Leaderboard")
-    st.dataframe(fac_county_df.head(100).round(2), width='stretch')
+    st.dataframe(fac_county_df.head(100).round(2), width="stretch")
     st.download_button(
         "Download Facility Performance Table (CSV)",
         data=fac_county_df.to_csv(index=False).encode("utf-8"),
@@ -101,5 +111,4 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
-    main()
+main()

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 52" width="240" height="52" fill="none">
+  <rect x="2" y="4" width="44" height="44" rx="11" fill="#0D9488"/>
+  <path d="M24 14V38M12 26H36" stroke="#E6F5F4" stroke-width="3.2" stroke-linecap="round" opacity="0.35"/>
+  <path d="M9 28H15L19 18L24 35L29 21L33 28H39" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="58" y="25" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" letter-spacing="-0.3">MediScope <tspan fill="#5EEAD4">AI</tspan></text>
+  <text x="58" y="41" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10.5" font-weight="500" fill="#CBD5E1">Inpatient Discharge Analytics</text>
+</svg>

@@ -5,16 +5,18 @@ from __future__ import annotations
 import plotly.express as px
 import streamlit as st
 
-st.set_page_config(page_title="Payment Analytics | MediScope AI", page_icon="🧾", layout="wide")
+if not st.session_state.get("_nav_shell_active"):
+    st.set_page_config(page_title="Payment Analytics | MediScope AI", page_icon="🧾", layout="wide")
 
 from src.config import PALETTE
-from src.dashboard_state import (
-    apply_global_filters,
-    get_dashboard_dataframe,
-    get_preaggregated_table,
-)
+from src.dashboard_state import get_page_context, get_preaggregated_table
 from src.eda import summarize_payment
-from src.utils import inject_custom_css, render_page_header
+from src.utils import (
+    inject_custom_css,
+    render_active_filter_banner,
+    render_page_header,
+    render_plain_english_guide,
+)
 from src.visualizations import (
     _apply_mediscope_layout,
     plot_charges_by_payment,
@@ -23,29 +25,26 @@ from src.visualizations import (
 
 
 def main() -> None:
-    inject_custom_css()
-    df, mode = get_dashboard_dataframe()
-    filtered_df, filters_active = apply_global_filters(df, mode)
+    if not st.session_state.get("_nav_shell_active"):
+        inject_custom_css()
+
+    filtered_df, filters_active, _, filter_summary = get_page_context()
 
     render_page_header(
         "Payment Analytics (RQ5)",
         "Primary payer mix, average hospital charges, length of stay, and secondary coverage patterns.",
     )
+    render_active_filter_banner(filter_summary)
 
     if filtered_df.empty:
         st.warning("No discharge records match the selected filters.")
         return
 
-    st.markdown(
-        """
-        <div class="insight-box">
-            <strong>Methodological Note:</strong> <code>Payment Typology 1</code> represents each discharge's
-            primary payer. Secondary (<code>Payment Typology 2</code>, ~49% populated) and tertiary
-            (<code>Payment Typology 3</code>, ~16% populated) fields are analysed separately below so primary
-            patient shares always sum to exactly 100% without double-counting.
-        </div>
-        """,
-        unsafe_allow_html=True,
+    render_plain_english_guide(
+        "Understanding Payer Categories (No Double-Counting)",
+        "<code>Payment Typology 1</code> is each patient's <strong>primary insurance</strong> so shares always add up to 100%. "
+        "Public programs (<strong>Medicare 39.4% + Medicaid 30.7%</strong>) cover ~70% of all stays. Secondary insurance "
+        "(<code>Payment Typology 2</code>) is shown separately on the bottom-right chart.",
     )
 
     if not filters_active:
@@ -57,10 +56,9 @@ def main() -> None:
 
     c1, c2 = st.columns(2)
     with c1:
-        # Compulsory Chart 4: Interactive Pie Chart of Patients by Primary Payment Type
-        st.plotly_chart(plot_payment_type_pie(pay_df), width='stretch')
+        st.plotly_chart(plot_payment_type_pie(pay_df), width="stretch")
     with c2:
-        st.plotly_chart(plot_charges_by_payment(pay_df), width='stretch')
+        st.plotly_chart(plot_charges_by_payment(pay_df), width="stretch")
 
     c3, c4 = st.columns(2)
     with c3:
@@ -79,16 +77,12 @@ def main() -> None:
             yaxis_title="Primary Payer",
             height=410,
         )
-        st.plotly_chart(fig_cnt, width='stretch')
+        st.plotly_chart(fig_cnt, width="stretch")
 
     with c4:
-        sec_counts = (
-            filtered_df["payment_typology_2"]
-            .astype(str)
-            .value_counts()
-            .reset_index()
-        )
+        sec_counts = filtered_df["payment_typology_2"].value_counts().reset_index()
         sec_counts.columns = ["secondary_payer", "discharges"]
+        sec_counts["secondary_payer"] = sec_counts["secondary_payer"].astype(str)
         fig_sec = px.bar(
             sec_counts.head(10),
             x="secondary_payer",
@@ -97,15 +91,15 @@ def main() -> None:
         )
         _apply_mediscope_layout(
             fig_sec,
-            "Secondary Payment Field Distribution (Payment Typology 2)",
+            "Secondary Payment Field (Payment Typology 2)",
             xaxis_title="Secondary Payer ('None' = Single-Payer Stay)",
             yaxis_title="Discharges",
             height=410,
         )
-        st.plotly_chart(fig_sec, width='stretch')
+        st.plotly_chart(fig_sec, width="stretch")
 
     st.markdown("#### Primary Payment Category Metrics")
-    st.dataframe(pay_df.round(2), width='stretch')
+    st.dataframe(pay_df.round(2), width="stretch")
     st.download_button(
         "Download Payment Summary (CSV)",
         data=pay_df.to_csv(index=False).encode("utf-8"),
@@ -114,5 +108,4 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
-    main()
+main()
