@@ -1,0 +1,1377 @@
+{
+  "kpis": {
+    "total_discharges": 2094484,
+    "unique_facilities": 205,
+    "unique_counties": 58,
+    "avg_los": 5.75,
+    "median_los": 3.0,
+    "min_los": 1.0,
+    "max_los": 120.0,
+    "los_std": 8.42,
+    "los_iqr": 4.0,
+    "avg_charges": 73458.85,
+    "median_charges": 38526.63,
+    "total_charges_sum": 153858377010.36,
+    "avg_costs": 22033.83,
+    "median_costs": 11622.84,
+    "total_costs_sum": 46149510182.7,
+    "avg_cost_per_day": 4729.45,
+    "avg_charge_to_cost": 3.75,
+    "ed_pct": 62.71,
+    "surgical_pct": 23.53
+  },
+  "skewness": {
+    "length_of_stay": 5.833,
+    "total_charges": 17.838,
+    "total_costs": 27.662
+  },
+  "spearman_corr": {
+    "length_of_stay": {
+      "length_of_stay": 1.0,
+      "total_charges": 0.612,
+      "total_costs": 0.6746,
+      "severity_numeric": 0.4804,
+      "age_ordinal": 0.2655
+    },
+    "total_charges": {
+      "length_of_stay": 0.612,
+      "total_charges": 1.0,
+      "total_costs": 0.8776,
+      "severity_numeric": 0.4077,
+      "age_ordinal": 0.3418
+    },
+    "total_costs": {
+      "length_of_stay": 0.6746,
+      "total_charges": 0.8776,
+      "total_costs": 1.0,
+      "severity_numeric": 0.4161,
+      "age_ordinal": 0.3109
+    },
+    "severity_numeric": {
+      "length_of_stay": 0.4804,
+      "total_charges": 0.4077,
+      "total_costs": 0.4161,
+      "severity_numeric": 1.0,
+      "age_ordinal": 0.354
+    },
+    "age_ordinal": {
+      "length_of_stay": 0.2655,
+      "total_charges": 0.3418,
+      "total_costs": 0.3109,
+      "severity_numeric": 0.354,
+      "age_ordinal": 1.0
+    }
+  },
+  "pearson_corr": {
+    "length_of_stay": {
+      "length_of_stay": 1.0,
+      "total_charges": 0.6761,
+      "total_costs": 0.6753,
+      "severity_numeric": 0.3636,
+      "age_ordinal": 0.1192
+    },
+    "total_charges": {
+      "length_of_stay": 0.6761,
+      "total_charges": 1.0,
+      "total_costs": 0.8617,
+      "severity_numeric": 0.3001,
+      "age_ordinal": 0.1084
+    },
+    "total_costs": {
+      "length_of_stay": 0.6753,
+      "total_charges": 0.8617,
+      "total_costs": 1.0,
+      "severity_numeric": 0.2848,
+      "age_ordinal": 0.096
+    },
+    "severity_numeric": {
+      "length_of_stay": 0.3636,
+      "total_charges": 0.3001,
+      "total_costs": 0.2848,
+      "severity_numeric": 1.0,
+      "age_ordinal": 0.3507
+    },
+    "age_ordinal": {
+      "length_of_stay": 0.1192,
+      "total_charges": 0.1084,
+      "total_costs": 0.096,
+      "severity_numeric": 0.3507,
+      "age_ordinal": 1.0
+    }
+  },
+  "kruskal_wallis": {
+    "severity_vs_charges": {
+      "H": 365804.69,
+      "p": 0.0
+    },
+    "severity_vs_los": {
+      "H": 498275.97,
+      "p": 0.0
+    },
+    "payment_vs_charges": {
+      "H": 127989.62,
+      "p": 0.0
+    }
+  },
+  "distributions": {
+    "age_group": {
+      "70 or Older": 618250,
+      "50 to 69": 583426,
+      "30 to 49": 415208,
+      "0 to 17": 285784,
+      "18 to 29": 191816
+    },
+    "gender": {
+      "F": 1141454,
+      "M": 952874,
+      "U": 156
+    },
+    "type_of_admission": {
+      "Emergency": 1382030,
+      "Elective": 351665,
+      "Newborn": 193946,
+      "Urgent": 157993,
+      "Trauma": 7688,
+      "Not Available": 1162
+    },
+    "med_surg": {
+      "Medical": 1599098,
+      "Surgical": 492838,
+      "Not Applicable": 2548
+    },
+    "emergency_department": {
+      "Y": 1313520,
+      "N": 780964
+    }
+  },
+  "top_counties": [
+    {
+      "hospital_county": "Manhattan",
+      "discharges": 364013,
+      "facilities": 19,
+      "avg_los": 5.869999885559082,
+      "median_los": 3.0,
+      "avg_charges": 117244.37,
+      "total_patient_days": 2135450.0
+    },
+    {
+      "hospital_county": "Kings",
+      "discharges": 189886,
+      "facilities": 14,
+      "avg_los": 6.039999961853027,
+      "median_los": 3.0,
+      "avg_charges": 69215.07,
+      "total_patient_days": 1146788.0
+    },
+    {
+      "hospital_county": "Nassau",
+      "discharges": 182783,
+      "facilities": 12,
+      "avg_los": 5.369999885559082,
+      "median_los": 3.0,
+      "avg_charges": 99329.67,
+      "total_patient_days": 980784.0
+    },
+    {
+      "hospital_county": "Queens",
+      "discharges": 169940,
+      "facilities": 10,
+      "avg_los": 5.71999979019165,
+      "median_los": 3.0,
+      "avg_charges": 66740.33,
+      "total_patient_days": 971452.0
+    },
+    {
+      "hospital_county": "Bronx",
+      "discharges": 162394,
+      "facilities": 10,
+      "avg_los": 6.230000019073486,
+      "median_los": 3.0,
+      "avg_charges": 82138.86,
+      "total_patient_days": 1011988.0
+    },
+    {
+      "hospital_county": "Suffolk",
+      "discharges": 156751,
+      "facilities": 11,
+      "avg_los": 5.239999771118164,
+      "median_los": 3.0,
+      "avg_charges": 75859.2,
+      "total_patient_days": 821382.0
+    },
+    {
+      "hospital_county": "Westchester",
+      "discharges": 114871,
+      "facilities": 16,
+      "avg_los": 6.699999809265137,
+      "median_los": 4.0,
+      "avg_charges": 92168.65,
+      "total_patient_days": 769576.9375
+    },
+    {
+      "hospital_county": "Erie",
+      "discharges": 111128,
+      "facilities": 10,
+      "avg_los": 5.980000019073486,
+      "median_los": 3.0,
+      "avg_charges": 41384.64,
+      "total_patient_days": 665061.0
+    },
+    {
+      "hospital_county": "Monroe",
+      "discharges": 108228,
+      "facilities": 5,
+      "avg_los": 6.5,
+      "median_los": 3.0,
+      "avg_charges": 37145.41,
+      "total_patient_days": 703756.0
+    },
+    {
+      "hospital_county": "Onondaga",
+      "discharges": 76206,
+      "facilities": 5,
+      "avg_los": 5.690000057220459,
+      "median_los": 3.0,
+      "avg_charges": 55540.5,
+      "total_patient_days": 433299.0
+    },
+    {
+      "hospital_county": "Richmond",
+      "discharges": 49669,
+      "facilities": 3,
+      "avg_los": 5.199999809265137,
+      "median_los": 3.0,
+      "avg_charges": 59392.24,
+      "total_patient_days": 258136.0
+    },
+    {
+      "hospital_county": "Albany",
+      "discharges": 46111,
+      "facilities": 4,
+      "avg_los": 5.809999942779541,
+      "median_los": 3.0,
+      "avg_charges": 54969.7,
+      "total_patient_days": 267717.0
+    },
+    {
+      "hospital_county": "Orange",
+      "discharges": 35707,
+      "facilities": 4,
+      "avg_los": 5.21999979019165,
+      "median_los": 3.0,
+      "avg_charges": 62119.17,
+      "total_patient_days": 186523.0
+    },
+    {
+      "hospital_county": "Dutchess",
+      "discharges": 33207,
+      "facilities": 3,
+      "avg_los": 5.449999809265137,
+      "median_los": 4.0,
+      "avg_charges": 57760.98,
+      "total_patient_days": 181043.0
+    },
+    {
+      "hospital_county": "Rockland",
+      "discharges": 29547,
+      "facilities": 3,
+      "avg_los": 5.460000038146973,
+      "median_los": 3.0,
+      "avg_charges": 76607.84,
+      "total_patient_days": 161227.0
+    }
+  ],
+  "newborn_vs_general": [
+    {
+      "is_newborn": false,
+      "discharges": 1891499,
+      "avg_los": 5.970576286315918,
+      "median_los": 3.0,
+      "avg_charges": 77207.72756187552,
+      "avg_costs": 23336.99698550726
+    },
+    {
+      "is_newborn": true,
+      "discharges": 202985,
+      "avg_los": 3.68196177482605,
+      "median_los": 2.0,
+      "avg_charges": 38525.199077764366,
+      "avg_costs": 9890.404323521441
+    }
+  ],
+  "top_15_longest_stay_diagnoses_min500": [
+    {
+      "ccsr_diagnosis_code": "NEO060",
+      "ccsr_diagnosis_description": "LEUKEMIA - ACUTE MYELOID LEUKEMIA (AML)",
+      "discharges": 1566,
+      "avg_los": 22.93000030517578,
+      "median_los": 20.0,
+      "std_los": 19.729999542236328,
+      "avg_charges": 399173.62,
+      "median_charges": 268104.75,
+      "avg_costs": 110319.81,
+      "median_costs": 75309.44
+    },
+    {
+      "ccsr_diagnosis_code": "NEO059",
+      "ccsr_diagnosis_description": "LEUKEMIA - ACUTE LYMPHOBLASTIC LEUKEMIA (ALL)",
+      "discharges": 586,
+      "avg_los": 20.889999389648438,
+      "median_los": 18.0,
+      "std_los": 18.520000457763672,
+      "avg_charges": 438436.38,
+      "median_charges": 315367.82,
+      "avg_costs": 116426.0,
+      "median_costs": 78276.76
+    },
+    {
+      "ccsr_diagnosis_code": "CIR022",
+      "ccsr_diagnosis_description": "SEQUELA OF HEMORRHAGIC CEREBROVASCULAR DISEASE",
+      "discharges": 1126,
+      "avg_los": 18.540000915527344,
+      "median_los": 16.0,
+      "std_los": 13.029999732971191,
+      "avg_charges": 121602.97,
+      "median_charges": 90864.12,
+      "avg_costs": 45956.26,
+      "median_costs": 33272.63
+    },
+    {
+      "ccsr_diagnosis_code": "INJ045",
+      "ccsr_diagnosis_description": "TRAUMATIC BRAIN INJURY (TBI); CONCUSSION, SUBSEQUENT ENCOUNTER",
+      "discharges": 987,
+      "avg_los": 16.920000076293945,
+      "median_los": 14.0,
+      "std_los": 14.15999984741211,
+      "avg_charges": 111039.13,
+      "median_charges": 82565.7,
+      "avg_costs": 45886.49,
+      "median_costs": 30003.21
+    },
+    {
+      "ccsr_diagnosis_code": "MBD001",
+      "ccsr_diagnosis_description": "SCHIZOPHRENIA SPECTRUM AND OTHER PSYCHOTIC DISORDERS",
+      "discharges": 37169,
+      "avg_los": 16.3799991607666,
+      "median_los": 11.0,
+      "std_los": 17.639999389648438,
+      "avg_charges": 73476.21,
+      "median_charges": 46285.44,
+      "avg_costs": 31574.5,
+      "median_costs": 19635.3
+    },
+    {
+      "ccsr_diagnosis_code": "CIR025",
+      "ccsr_diagnosis_description": "SEQUELA OF CEREBRAL INFARCTION AND OTHER CEREBROVASCULAR DISEASE",
+      "discharges": 5996,
+      "avg_los": 14.260000228881836,
+      "median_los": 13.0,
+      "std_los": 10.789999961853027,
+      "avg_charges": 96419.04,
+      "median_charges": 73848.68,
+      "avg_costs": 35273.88,
+      "median_costs": 26461.49
+    },
+    {
+      "ccsr_diagnosis_code": "SKN003",
+      "ccsr_diagnosis_description": "PRESSURE ULCER OF SKIN",
+      "discharges": 1447,
+      "avg_los": 14.140000343322754,
+      "median_los": 8.0,
+      "std_los": 19.959999084472656,
+      "avg_charges": 92656.45,
+      "median_charges": 58256.92,
+      "avg_costs": 31812.48,
+      "median_costs": 17990.38
+    },
+    {
+      "ccsr_diagnosis_code": "CIR004",
+      "ccsr_diagnosis_description": "ENDOCARDITIS AND ENDOCARDIAL DISEASE",
+      "discharges": 814,
+      "avg_los": 13.640000343322754,
+      "median_los": 10.0,
+      "std_los": 13.779999732971191,
+      "avg_charges": 203195.5,
+      "median_charges": 93171.81,
+      "avg_costs": 62039.55,
+      "median_costs": 29211.9
+    },
+    {
+      "ccsr_diagnosis_code": "NEO065",
+      "ccsr_diagnosis_description": "MULTIPLE MYELOMA",
+      "discharges": 2122,
+      "avg_los": 13.600000381469727,
+      "median_los": 12.0,
+      "std_los": 12.279999732971191,
+      "avg_charges": 222038.78,
+      "median_charges": 164860.48,
+      "avg_costs": 60563.58,
+      "median_costs": 46140.43
+    },
+    {
+      "ccsr_diagnosis_code": "MBD010",
+      "ccsr_diagnosis_description": "FEEDING AND EATING DISORDERS",
+      "discharges": 876,
+      "avg_los": 13.420000076293945,
+      "median_los": 10.0,
+      "std_los": 12.420000076293945,
+      "avg_charges": 103931.31,
+      "median_charges": 77759.83,
+      "avg_costs": 26987.83,
+      "median_costs": 19514.62
+    },
+    {
+      "ccsr_diagnosis_code": "NVS002",
+      "ccsr_diagnosis_description": "ENCEPHALITIS",
+      "discharges": 854,
+      "avg_los": 13.289999961853027,
+      "median_los": 9.0,
+      "std_los": 15.710000038146973,
+      "avg_charges": 218349.67,
+      "median_charges": 125286.42,
+      "avg_costs": 60309.75,
+      "median_costs": 31292.6
+    },
+    {
+      "ccsr_diagnosis_code": "MBD014",
+      "ccsr_diagnosis_description": "NEURODEVELOPMENTAL DISORDERS",
+      "discharges": 1084,
+      "avg_los": 13.069999694824219,
+      "median_los": 7.0,
+      "std_los": 19.309999465942383,
+      "avg_charges": 74425.15,
+      "median_charges": 36191.02,
+      "avg_costs": 31004.26,
+      "median_costs": 13769.11
+    },
+    {
+      "ccsr_diagnosis_code": "INJ043",
+      "ccsr_diagnosis_description": "FRACTURE OF THE NECK OF THE FEMUR (HIP), SUBSEQUENT ENCOUNTER",
+      "discharges": 1241,
+      "avg_los": 12.979999542236328,
+      "median_los": 13.0,
+      "std_los": 7.239999771118164,
+      "avg_charges": 86856.92,
+      "median_charges": 71095.4,
+      "avg_costs": 31641.35,
+      "median_costs": 26069.4
+    },
+    {
+      "ccsr_diagnosis_code": "NVS008",
+      "ccsr_diagnosis_description": "PARALYSIS (OTHER THAN CEREBRAL PALSY)",
+      "discharges": 940,
+      "avg_los": 12.899999618530273,
+      "median_los": 7.0,
+      "std_los": 15.819999694824219,
+      "avg_charges": 117374.25,
+      "median_charges": 69947.47,
+      "avg_costs": 34834.21,
+      "median_costs": 19737.6
+    },
+    {
+      "ccsr_diagnosis_code": "NEO058",
+      "ccsr_diagnosis_description": "NON-HODGKIN LYMPHOMA",
+      "discharges": 3017,
+      "avg_los": 12.729999542236328,
+      "median_los": 8.0,
+      "std_los": 13.770000457763672,
+      "avg_charges": 242736.21,
+      "median_charges": 121518.01,
+      "avg_costs": 68995.13,
+      "median_costs": 33949.34
+    }
+  ],
+  "top_15_volume_diagnoses": [
+    {
+      "ccsr_diagnosis_code": "PNL001",
+      "ccsr_diagnosis_description": "LIVEBORN",
+      "discharges": 195144,
+      "avg_los": 3.5399999618530273,
+      "median_los": 2.0,
+      "std_los": 8.600000381469727,
+      "avg_charges": 35443.42,
+      "median_charges": 13068.43,
+      "avg_costs": 9147.05,
+      "median_costs": 2595.54
+    },
+    {
+      "ccsr_diagnosis_code": "INF002",
+      "ccsr_diagnosis_description": "SEPTICEMIA",
+      "discharges": 137753,
+      "avg_los": 9.720000267028809,
+      "median_los": 6.0,
+      "std_los": 11.109999656677246,
+      "avg_charges": 121737.4,
+      "median_charges": 66301.29,
+      "avg_costs": 36270.14,
+      "median_costs": 18979.09
+    },
+    {
+      "ccsr_diagnosis_code": "INF012",
+      "ccsr_diagnosis_description": "CORONAVIRUS DISEASE 2019 (COVID-19)",
+      "discharges": 82451,
+      "avg_los": 8.640000343322754,
+      "median_los": 5.0,
+      "std_los": 10.149999618530273,
+      "avg_charges": 95135.03,
+      "median_charges": 50905.64,
+      "avg_costs": 30236.72,
+      "median_costs": 15408.48
+    },
+    {
+      "ccsr_diagnosis_code": "CIR019",
+      "ccsr_diagnosis_description": "HEART FAILURE",
+      "discharges": 58368,
+      "avg_los": 6.650000095367432,
+      "median_los": 5.0,
+      "std_los": 7.079999923706055,
+      "avg_charges": 80963.29,
+      "median_charges": 44973.32,
+      "avg_costs": 23766.7,
+      "median_costs": 13142.68
+    },
+    {
+      "ccsr_diagnosis_code": "PRG023",
+      "ccsr_diagnosis_description": "COMPLICATIONS SPECIFIED DURING CHILDBIRTH",
+      "discharges": 40688,
+      "avg_los": 2.4700000286102295,
+      "median_los": 2.0,
+      "std_los": 2.119999885559082,
+      "avg_charges": 28687.18,
+      "median_charges": 25250.54,
+      "avg_costs": 9963.01,
+      "median_costs": 8490.22
+    },
+    {
+      "ccsr_diagnosis_code": "END003",
+      "ccsr_diagnosis_description": "DIABETES MELLITUS WITH COMPLICATION",
+      "discharges": 40450,
+      "avg_los": 6.0,
+      "median_los": 4.0,
+      "std_los": 7.099999904632568,
+      "avg_charges": 72603.04,
+      "median_charges": 42853.69,
+      "avg_costs": 23482.75,
+      "median_costs": 12928.92
+    },
+    {
+      "ccsr_diagnosis_code": "MBD017",
+      "ccsr_diagnosis_description": "ALCOHOL-RELATED DISORDERS",
+      "discharges": 39291,
+      "avg_los": 5.650000095367432,
+      "median_los": 4.0,
+      "std_los": 6.489999771118164,
+      "avg_charges": 34047.07,
+      "median_charges": 20991.65,
+      "avg_costs": 10635.86,
+      "median_costs": 6500.99
+    },
+    {
+      "ccsr_diagnosis_code": "MBD001",
+      "ccsr_diagnosis_description": "SCHIZOPHRENIA SPECTRUM AND OTHER PSYCHOTIC DISORDERS",
+      "discharges": 37169,
+      "avg_los": 16.3799991607666,
+      "median_los": 11.0,
+      "std_los": 17.639999389648438,
+      "avg_charges": 73476.21,
+      "median_charges": 46285.44,
+      "avg_costs": 31574.5,
+      "median_costs": 19635.3
+    },
+    {
+      "ccsr_diagnosis_code": "MUS006",
+      "ccsr_diagnosis_description": "OSTEOARTHRITIS",
+      "discharges": 35555,
+      "avg_los": 2.240000009536743,
+      "median_los": 2.0,
+      "std_los": 2.0799999237060547,
+      "avg_charges": 77177.49,
+      "median_charges": 69145.01,
+      "avg_costs": 23732.83,
+      "median_costs": 21694.84
+    },
+    {
+      "ccsr_diagnosis_code": "CIR017",
+      "ccsr_diagnosis_description": "CARDIAC DYSRHYTHMIAS",
+      "discharges": 33736,
+      "avg_los": 3.700000047683716,
+      "median_los": 2.0,
+      "std_los": 4.800000190734863,
+      "avg_charges": 78913.03,
+      "median_charges": 43363.47,
+      "avg_costs": 20815.3,
+      "median_costs": 11823.74
+    },
+    {
+      "ccsr_diagnosis_code": "CIR020",
+      "ccsr_diagnosis_description": "CEREBRAL INFARCTION",
+      "discharges": 28801,
+      "avg_los": 6.670000076293945,
+      "median_los": 4.0,
+      "std_los": 7.889999866485596,
+      "avg_charges": 98042.57,
+      "median_charges": 61075.85,
+      "avg_costs": 26912.56,
+      "median_costs": 15928.33
+    },
+    {
+      "ccsr_diagnosis_code": "CIR009",
+      "ccsr_diagnosis_description": "ACUTE MYOCARDIAL INFARCTION",
+      "discharges": 27675,
+      "avg_los": 4.929999828338623,
+      "median_los": 3.0,
+      "std_los": 6.679999828338623,
+      "avg_charges": 111020.96,
+      "median_charges": 68277.85,
+      "avg_costs": 29661.95,
+      "median_costs": 17761.72
+    },
+    {
+      "ccsr_diagnosis_code": "MUS011",
+      "ccsr_diagnosis_description": "SPONDYLOPATHIES/SPONDYLOARTHROPATHY (INCLUDING INFECTIVE)",
+      "discharges": 27471,
+      "avg_los": 4.090000152587891,
+      "median_los": 3.0,
+      "std_los": 4.619999885559082,
+      "avg_charges": 109968.3,
+      "median_charges": 73514.03,
+      "avg_costs": 31733.41,
+      "median_costs": 24076.4
+    },
+    {
+      "ccsr_diagnosis_code": "GEN004",
+      "ccsr_diagnosis_description": "URINARY TRACT INFECTIONS",
+      "discharges": 26667,
+      "avg_los": 4.760000228881836,
+      "median_los": 3.0,
+      "std_los": 4.949999809265137,
+      "avg_charges": 47417.97,
+      "median_charges": 33502.54,
+      "avg_costs": 13811.36,
+      "median_costs": 9202.1
+    },
+    {
+      "ccsr_diagnosis_code": "SKN001",
+      "ccsr_diagnosis_description": "SKIN AND SUBCUTANEOUS TISSUE INFECTIONS",
+      "discharges": 25000,
+      "avg_los": 4.53000020980835,
+      "median_los": 3.0,
+      "std_los": 4.929999828338623,
+      "avg_charges": 42660.8,
+      "median_charges": 29361.1,
+      "avg_costs": 13212.72,
+      "median_costs": 8739.7
+    }
+  ],
+  "severity_summary": [
+    {
+      "apr_severity_code": "0",
+      "apr_severity_description": "Not Applicable",
+      "discharges": 2548,
+      "avg_los": 6.0,
+      "median_los": 4.0,
+      "avg_charges": 62382.61,
+      "median_charges": 30909.68,
+      "q25_charges": 14454.95,
+      "q75_charges": 64107.08,
+      "avg_costs": 19133.94,
+      "median_costs": 9930.78
+    },
+    {
+      "apr_severity_code": "1",
+      "apr_severity_description": "Minor",
+      "discharges": 633790,
+      "avg_los": 2.869999885559082,
+      "median_los": 2.0,
+      "avg_charges": 36855.11,
+      "median_charges": 24641.56,
+      "q25_charges": 13030.19,
+      "q75_charges": 45384.7,
+      "avg_costs": 10930.46,
+      "median_costs": 7574.41
+    },
+    {
+      "apr_severity_code": "2",
+      "apr_severity_description": "Moderate",
+      "discharges": 759229,
+      "avg_los": 4.809999942779541,
+      "median_los": 3.0,
+      "avg_charges": 54680.99,
+      "median_charges": 35835.19,
+      "q25_charges": 19065.97,
+      "q75_charges": 65604.87,
+      "avg_costs": 16623.99,
+      "median_costs": 10785.57
+    },
+    {
+      "apr_severity_code": "3",
+      "apr_severity_description": "Major",
+      "discharges": 498555,
+      "avg_los": 7.289999961853027,
+      "median_los": 5.0,
+      "avg_charges": 90492.53,
+      "median_charges": 55809.34,
+      "q25_charges": 29058.74,
+      "q75_charges": 106369.58,
+      "avg_costs": 26999.85,
+      "median_costs": 16383.14
+    },
+    {
+      "apr_severity_code": "4",
+      "apr_severity_description": "Extreme",
+      "discharges": 200362,
+      "avg_los": 14.5600004196167,
+      "median_los": 10.0,
+      "avg_charges": 218155.79,
+      "median_charges": 113436.92,
+      "q25_charges": 54805.94,
+      "q75_charges": 237171.3,
+      "avg_costs": 65335.83,
+      "median_costs": 33776.77
+    }
+  ],
+  "age_gender_summary": [
+    {
+      "age_group": "0 to 17",
+      "gender": "F",
+      "discharges": 138913,
+      "avg_charges": 45772.57,
+      "median_charges": 15336.33,
+      "avg_costs": 12918.44,
+      "median_costs": 3628.88,
+      "avg_los": 4.050000190734863,
+      "median_los": 2.0
+    },
+    {
+      "age_group": "0 to 17",
+      "gender": "M",
+      "discharges": 146814,
+      "avg_charges": 50390.3,
+      "median_charges": 15927.98,
+      "avg_costs": 14126.82,
+      "median_costs": 3983.71,
+      "avg_los": 4.079999923706055,
+      "median_los": 2.0
+    },
+    {
+      "age_group": "0 to 17",
+      "gender": "U",
+      "discharges": 57,
+      "avg_charges": 19318.01,
+      "median_charges": 14234.27,
+      "avg_costs": 6895.84,
+      "median_costs": 2260.26,
+      "avg_los": 3.140000104904175,
+      "median_los": 2.0
+    },
+    {
+      "age_group": "18 to 29",
+      "gender": "F",
+      "discharges": 137911,
+      "avg_charges": 39820.63,
+      "median_charges": 26775.0,
+      "avg_costs": 13317.73,
+      "median_costs": 9029.27,
+      "avg_los": 3.6700000762939453,
+      "median_los": 2.0
+    },
+    {
+      "age_group": "18 to 29",
+      "gender": "M",
+      "discharges": 53871,
+      "avg_charges": 67821.78,
+      "median_charges": 35251.23,
+      "avg_costs": 22679.34,
+      "median_costs": 11298.96,
+      "avg_los": 6.880000114440918,
+      "median_los": 4.0
+    },
+    {
+      "age_group": "18 to 29",
+      "gender": "U",
+      "discharges": 34,
+      "avg_charges": 48994.66,
+      "median_charges": 20805.03,
+      "avg_costs": 16650.92,
+      "median_costs": 7952.72,
+      "avg_los": 5.059999942779541,
+      "median_los": 2.0
+    },
+    {
+      "age_group": "30 to 49",
+      "gender": "F",
+      "discharges": 264923,
+      "avg_charges": 50838.99,
+      "median_charges": 31935.02,
+      "avg_costs": 15961.15,
+      "median_costs": 10027.73,
+      "avg_los": 4.059999942779541,
+      "median_los": 2.0
+    },
+    {
+      "age_group": "30 to 49",
+      "gender": "M",
+      "discharges": 150258,
+      "avg_charges": 73378.41,
+      "median_charges": 37877.02,
+      "avg_costs": 23517.39,
+      "median_costs": 11820.16,
+      "avg_los": 6.340000152587891,
+      "median_los": 4.0
+    },
+    {
+      "age_group": "30 to 49",
+      "gender": "U",
+      "discharges": 27,
+      "avg_charges": 60989.45,
+      "median_charges": 32883.22,
+      "avg_costs": 24431.19,
+      "median_costs": 14483.24,
+      "avg_los": 5.670000076293945,
+      "median_los": 3.0
+    },
+    {
+      "age_group": "50 to 69",
+      "gender": "F",
+      "discharges": 260844,
+      "avg_charges": 86281.95,
+      "median_charges": 49805.89,
+      "avg_costs": 26081.29,
+      "median_costs": 14682.4,
+      "avg_los": 6.349999904632568,
+      "median_los": 4.0
+    },
+    {
+      "age_group": "50 to 69",
+      "gender": "M",
+      "discharges": 322561,
+      "avg_charges": 93301.28,
+      "median_charges": 49980.11,
+      "avg_costs": 28424.72,
+      "median_costs": 14858.29,
+      "avg_los": 6.710000038146973,
+      "median_los": 4.0
+    },
+    {
+      "age_group": "50 to 69",
+      "gender": "U",
+      "discharges": 21,
+      "avg_charges": 89777.84,
+      "median_charges": 35877.7,
+      "avg_costs": 27553.54,
+      "median_costs": 15459.29,
+      "avg_los": 8.100000381469727,
+      "median_los": 3.0
+    },
+    {
+      "age_group": "70 or Older",
+      "gender": "F",
+      "discharges": 338863,
+      "avg_charges": 82521.62,
+      "median_charges": 52173.83,
+      "avg_costs": 23665.72,
+      "median_costs": 14541.29,
+      "avg_los": 6.590000152587891,
+      "median_los": 4.0
+    },
+    {
+      "age_group": "70 or Older",
+      "gender": "M",
+      "discharges": 279370,
+      "avg_charges": 92670.67,
+      "median_charges": 55076.24,
+      "avg_costs": 26725.61,
+      "median_costs": 15531.54,
+      "avg_los": 6.869999885559082,
+      "median_los": 4.0
+    },
+    {
+      "age_group": "70 or Older",
+      "gender": "U",
+      "discharges": 17,
+      "avg_charges": 107017.87,
+      "median_charges": 66302.48,
+      "avg_costs": 32981.07,
+      "median_costs": 19069.17,
+      "avg_los": 5.650000095367432,
+      "median_los": 4.0
+    }
+  ],
+  "payment_summary": [
+    {
+      "payment_typology_1": "Medicare",
+      "discharges": 824504,
+      "avg_charges": 88049.02,
+      "median_charges": 52362.49,
+      "avg_costs": 25767.52,
+      "median_costs": 14918.19,
+      "avg_los": 6.889999866485596,
+      "median_los": 4.0,
+      "avg_payer_count": 1.99,
+      "share_pct": 39.37
+    },
+    {
+      "payment_typology_1": "Medicaid",
+      "discharges": 643229,
+      "avg_charges": 62726.27,
+      "median_charges": 29623.39,
+      "avg_costs": 20309.7,
+      "median_costs": 9915.74,
+      "avg_los": 5.5,
+      "median_los": 3.0,
+      "avg_payer_count": 1.5,
+      "share_pct": 30.71
+    },
+    {
+      "payment_typology_1": "Private Health Insurance",
+      "discharges": 306175,
+      "avg_charges": 70144.21,
+      "median_charges": 36355.66,
+      "avg_costs": 20019.69,
+      "median_costs": 10387.42,
+      "avg_los": 4.519999980926514,
+      "median_los": 2.0,
+      "avg_payer_count": 1.33,
+      "share_pct": 14.62
+    },
+    {
+      "payment_typology_1": "Blue Cross/Blue Shield",
+      "discharges": 223137,
+      "avg_charges": 60834.81,
+      "median_charges": 30525.36,
+      "avg_costs": 17263.67,
+      "median_costs": 9042.0,
+      "avg_los": 4.239999771118164,
+      "median_los": 2.0,
+      "avg_payer_count": 1.37,
+      "share_pct": 10.65
+    },
+    {
+      "payment_typology_1": "Managed Care, Unspecified",
+      "discharges": 28201,
+      "avg_charges": 49294.72,
+      "median_charges": 26783.95,
+      "avg_costs": 14498.74,
+      "median_costs": 8209.23,
+      "avg_los": 4.650000095367432,
+      "median_los": 3.0,
+      "avg_payer_count": 1.18,
+      "share_pct": 1.35
+    },
+    {
+      "payment_typology_1": "Self-Pay",
+      "discharges": 27058,
+      "avg_charges": 50513.07,
+      "median_charges": 26098.34,
+      "avg_costs": 18657.06,
+      "median_costs": 8867.56,
+      "avg_los": 4.579999923706055,
+      "median_los": 2.0,
+      "avg_payer_count": 1.23,
+      "share_pct": 1.29
+    },
+    {
+      "payment_typology_1": "Miscellaneous/Other",
+      "discharges": 22419,
+      "avg_charges": 97056.53,
+      "median_charges": 54106.62,
+      "avg_costs": 28078.94,
+      "median_costs": 16064.01,
+      "avg_los": 5.650000095367432,
+      "median_los": 3.0,
+      "avg_payer_count": 1.64,
+      "share_pct": 1.07
+    },
+    {
+      "payment_typology_1": "Federal/State/Local/VA",
+      "discharges": 18527,
+      "avg_charges": 45419.7,
+      "median_charges": 23529.16,
+      "avg_costs": 15753.33,
+      "median_costs": 8975.53,
+      "avg_los": 5.239999771118164,
+      "median_los": 3.0,
+      "avg_payer_count": 1.31,
+      "share_pct": 0.88
+    },
+    {
+      "payment_typology_1": "Department of Corrections",
+      "discharges": 1234,
+      "avg_charges": 72134.17,
+      "median_charges": 35779.6,
+      "avg_costs": 19080.57,
+      "median_costs": 11129.84,
+      "avg_los": 5.849999904632568,
+      "median_los": 4.0,
+      "avg_payer_count": 1.2,
+      "share_pct": 0.06
+    }
+  ],
+  "top_15_facilities_by_volume": [
+    {
+      "hospital_county": "Manhattan",
+      "permanent_facility_id": "001456",
+      "facility_name": "Mount Sinai Hospital",
+      "discharges": 49522,
+      "total_patient_days": 321510.0,
+      "avg_los": 6.489999771118164,
+      "median_los": 3.0,
+      "avg_charges": 125411.36,
+      "avg_costs": 33697.33,
+      "ed_share_pct": 34.71
+    },
+    {
+      "hospital_county": "Nassau",
+      "permanent_facility_id": "000541",
+      "facility_name": "North Shore University Hospital",
+      "discharges": 49112,
+      "total_patient_days": 271741.0,
+      "avg_los": 5.53000020980835,
+      "median_los": 3.0,
+      "avg_charges": 112594.94,
+      "avg_costs": 20413.15,
+      "ed_share_pct": 53.23
+    },
+    {
+      "hospital_county": "Manhattan",
+      "permanent_facility_id": "001463",
+      "facility_name": "NYU Langone Hospitals",
+      "discharges": 42787,
+      "total_patient_days": 214056.0,
+      "avg_los": 5.0,
+      "median_los": 3.0,
+      "avg_charges": 166167.03,
+      "avg_costs": 39566.97,
+      "ed_share_pct": 46.86
+    },
+    {
+      "hospital_county": "Manhattan",
+      "permanent_facility_id": "001458",
+      "facility_name": "New York-Presbyterian Hospital - New York Weill Cornell Center",
+      "discharges": 42183,
+      "total_patient_days": 239727.0,
+      "avg_los": 5.679999828338623,
+      "median_los": 3.0,
+      "avg_charges": 126663.69,
+      "avg_costs": 40804.19,
+      "ed_share_pct": 57.23
+    },
+    {
+      "hospital_county": "Manhattan",
+      "permanent_facility_id": "001464",
+      "facility_name": "New York-Presbyterian Hospital - Columbia Presbyterian Center",
+      "discharges": 41774,
+      "total_patient_days": 278709.0,
+      "avg_los": 6.670000076293945,
+      "median_los": 3.0,
+      "avg_charges": 158850.83,
+      "avg_costs": 49357.26,
+      "ed_share_pct": 62.54
+    },
+    {
+      "hospital_county": "Monroe",
+      "permanent_facility_id": "000413",
+      "facility_name": "Strong Memorial Hospital",
+      "discharges": 41390,
+      "total_patient_days": 289272.0,
+      "avg_los": 6.989999771118164,
+      "median_los": 3.0,
+      "avg_charges": 48597.43,
+      "avg_costs": 20720.21,
+      "ed_share_pct": 63.76
+    },
+    {
+      "hospital_county": "Queens",
+      "permanent_facility_id": "001630",
+      "facility_name": "Long Island Jewish Medical Center",
+      "discharges": 40162,
+      "total_patient_days": 263096.0,
+      "avg_los": 6.550000190734863,
+      "median_los": 3.0,
+      "avg_charges": 97071.17,
+      "avg_costs": 18918.97,
+      "ed_share_pct": 51.33
+    },
+    {
+      "hospital_county": "Albany",
+      "permanent_facility_id": "000001",
+      "facility_name": "Albany Medical Center Hospital",
+      "discharges": 36466,
+      "total_patient_days": 220824.0,
+      "avg_los": 6.059999942779541,
+      "median_los": 3.0,
+      "avg_charges": 58799.33,
+      "avg_costs": 17339.32,
+      "ed_share_pct": 63.32
+    },
+    {
+      "hospital_county": "Bronx",
+      "permanent_facility_id": "001169",
+      "facility_name": "Montefiore Medical Center - Henry & Lucy Moses Div",
+      "discharges": 35992,
+      "total_patient_days": 228455.0,
+      "avg_los": 6.349999904632568,
+      "median_los": 4.0,
+      "avg_charges": 142380.47,
+      "avg_costs": 26461.98,
+      "ed_share_pct": 74.74
+    },
+    {
+      "hospital_county": "Kings",
+      "permanent_facility_id": "001305",
+      "facility_name": "Maimonides Medical Center",
+      "discharges": 35951,
+      "total_patient_days": 190022.0,
+      "avg_los": 5.289999961853027,
+      "median_los": 3.0,
+      "avg_charges": 73039.26,
+      "avg_costs": 18807.44,
+      "ed_share_pct": 40.84
+    },
+    {
+      "hospital_county": "Suffolk",
+      "permanent_facility_id": "000245",
+      "facility_name": "Stony Brook University Hospital",
+      "discharges": 35674,
+      "total_patient_days": 219464.0,
+      "avg_los": 6.150000095367432,
+      "median_los": 3.0,
+      "avg_charges": 96982.15,
+      "avg_costs": 34282.35,
+      "ed_share_pct": 72.15
+    },
+    {
+      "hospital_county": "Nassau",
+      "permanent_facility_id": "000511",
+      "facility_name": "NYU Langone Hospital-Long Island",
+      "discharges": 34981,
+      "total_patient_days": 154003.0,
+      "avg_los": 4.400000095367432,
+      "median_los": 2.0,
+      "avg_charges": 124657.88,
+      "avg_costs": 30307.58,
+      "ed_share_pct": 56.33
+    },
+    {
+      "hospital_county": "Manhattan",
+      "permanent_facility_id": "001450",
+      "facility_name": "Lenox Hill Hospital",
+      "discharges": 32505,
+      "total_patient_days": 123965.0,
+      "avg_los": 3.809999942779541,
+      "median_los": 2.0,
+      "avg_charges": 89677.59,
+      "avg_costs": 19187.65,
+      "ed_share_pct": 41.78
+    },
+    {
+      "hospital_county": "Monroe",
+      "permanent_facility_id": "000411",
+      "facility_name": "Rochester General Hospital",
+      "discharges": 29746,
+      "total_patient_days": 197171.0,
+      "avg_los": 6.630000114440918,
+      "median_los": 4.0,
+      "avg_charges": 39017.38,
+      "avg_costs": 15231.01,
+      "ed_share_pct": 69.38
+    },
+    {
+      "hospital_county": "Kings",
+      "permanent_facility_id": "001306",
+      "facility_name": "New York - Presbyterian Brooklyn Methodist Hospital",
+      "discharges": 29424,
+      "total_patient_days": 163154.0,
+      "avg_los": 5.539999961853027,
+      "median_los": 3.0,
+      "avg_charges": 60222.78,
+      "avg_costs": 17795.66,
+      "ed_share_pct": 76.3
+    }
+  ],
+  "top_15_facilities_by_los_min500": [
+    {
+      "hospital_county": "Manhattan",
+      "permanent_facility_id": "001486",
+      "facility_name": "Henry J. Carter Specialty Hospital",
+      "discharges": 523,
+      "total_patient_days": 23966.0,
+      "avg_los": 45.81999969482422,
+      "median_los": 37.0,
+      "avg_charges": 310014.54,
+      "avg_costs": 174030.07,
+      "ed_share_pct": 0.38
+    },
+    {
+      "hospital_county": "Bronx",
+      "permanent_facility_id": "001175",
+      "facility_name": "Calvary Hospital Inc",
+      "discharges": 2660,
+      "total_patient_days": 61813.0,
+      "avg_los": 23.239999771118164,
+      "median_los": 11.0,
+      "avg_charges": 60253.22,
+      "avg_costs": 33686.43,
+      "ed_share_pct": 0.0
+    },
+    {
+      "hospital_county": "Westchester",
+      "permanent_facility_id": "001047",
+      "facility_name": "New York-Presbyterian Westchester Behavioral Health Center",
+      "discharges": 3769,
+      "total_patient_days": 65036.0,
+      "avg_los": 17.260000228881836,
+      "median_los": 12.0,
+      "avg_charges": 118086.83,
+      "avg_costs": 30307.36,
+      "ed_share_pct": 26.59
+    },
+    {
+      "hospital_county": "Rockland",
+      "permanent_facility_id": "000775",
+      "facility_name": "Helen Hayes Hospital",
+      "discharges": 1527,
+      "total_patient_days": 25722.0,
+      "avg_los": 16.84000015258789,
+      "median_los": 14.0,
+      "avg_charges": 73056.08,
+      "avg_costs": 51648.16,
+      "ed_share_pct": 0.0
+    },
+    {
+      "hospital_county": "Westchester",
+      "permanent_facility_id": "001046",
+      "facility_name": "Winifred Masterson Burke Rehabilitation Hospital",
+      "discharges": 2467,
+      "total_patient_days": 41537.0,
+      "avg_los": 16.84000015258789,
+      "median_los": 15.0,
+      "avg_charges": 53871.11,
+      "avg_costs": 25364.44,
+      "ed_share_pct": 0.0
+    },
+    {
+      "hospital_county": "Schenectady",
+      "permanent_facility_id": "000831",
+      "facility_name": "Sunnyview Hospital and Rehabilitation Center",
+      "discharges": 697,
+      "total_patient_days": 10506.0,
+      "avg_los": 15.069999694824219,
+      "median_los": 12.0,
+      "avg_charges": 48895.73,
+      "avg_costs": 21369.55,
+      "ed_share_pct": 0.0
+    },
+    {
+      "hospital_county": "Westchester",
+      "permanent_facility_id": "001133",
+      "facility_name": "St. Joseph's MC-St. Vincent's Westchester Division",
+      "discharges": 2711,
+      "total_patient_days": 39211.0,
+      "avg_los": 14.460000038146973,
+      "median_los": 12.0,
+      "avg_charges": 23550.14,
+      "avg_costs": 11174.13,
+      "ed_share_pct": 0.0
+    },
+    {
+      "hospital_county": "Chemung",
+      "permanent_facility_id": "000118",
+      "facility_name": "St. Joseph's Hospital",
+      "discharges": 1066,
+      "total_patient_days": 11686.0,
+      "avg_los": 10.960000038146973,
+      "median_los": 8.0,
+      "avg_charges": 22128.65,
+      "avg_costs": 7071.91,
+      "ed_share_pct": 39.21
+    },
+    {
+      "hospital_county": "Bronx",
+      "permanent_facility_id": "001164",
+      "facility_name": "BronxCare Hospital Center",
+      "discharges": 4030,
+      "total_patient_days": 43474.0,
+      "avg_los": 10.789999961853027,
+      "median_los": 5.0,
+      "avg_charges": 20026.92,
+      "avg_costs": 18472.47,
+      "ed_share_pct": 22.75
+    },
+    {
+      "hospital_county": "Kings",
+      "permanent_facility_id": "001315",
+      "facility_name": "Kingsbrook Jewish Medical Center",
+      "discharges": 2994,
+      "total_patient_days": 30396.0,
+      "avg_los": 10.149999618530273,
+      "median_los": 7.0,
+      "avg_charges": 63409.2,
+      "avg_costs": 21721.97,
+      "ed_share_pct": 84.84
+    },
+    {
+      "hospital_county": "Niagara",
+      "permanent_facility_id": "000565",
+      "facility_name": "Eastern Niagara Hospital - Lockport Division",
+      "discharges": 947,
+      "total_patient_days": 9225.0,
+      "avg_los": 9.739999771118164,
+      "median_los": 5.0,
+      "avg_charges": 23615.59,
+      "avg_costs": 8432.89,
+      "ed_share_pct": 64.52
+    },
+    {
+      "hospital_county": "Broome",
+      "permanent_facility_id": "000042",
+      "facility_name": "United Health Services Hospitals Inc. - Binghamton General Hospital",
+      "discharges": 3483,
+      "total_patient_days": 32828.0,
+      "avg_los": 9.430000305175781,
+      "median_los": 6.0,
+      "avg_charges": 26840.08,
+      "avg_costs": 13548.79,
+      "ed_share_pct": 74.48
+    },
+    {
+      "hospital_county": "Westchester",
+      "permanent_facility_id": "001098",
+      "facility_name": "St. Joseph's Medical Center",
+      "discharges": 2968,
+      "total_patient_days": 27869.0,
+      "avg_los": 9.390000343322754,
+      "median_los": 5.0,
+      "avg_charges": 56087.74,
+      "avg_costs": 28907.32,
+      "ed_share_pct": 79.92
+    },
+    {
+      "hospital_county": "Erie",
+      "permanent_facility_id": "000210",
+      "facility_name": "Erie County Medical Center",
+      "discharges": 17544,
+      "total_patient_days": 148199.0,
+      "avg_los": 8.449999809265137,
+      "median_los": 5.0,
+      "avg_charges": 38747.86,
+      "avg_costs": 22793.63,
+      "ed_share_pct": 78.39
+    },
+    {
+      "hospital_county": "Nassau",
+      "permanent_facility_id": "000490",
+      "facility_name": "Glen Cove Hospital",
+      "discharges": 4891,
+      "total_patient_days": 41215.0,
+      "avg_los": 8.430000305175781,
+      "median_los": 5.0,
+      "avg_charges": 96154.19,
+      "avg_costs": 24575.0,
+      "ed_share_pct": 59.15
+    }
+  ],
+  "sample_rows_exported": 80000,
+  "sample_parquet_mb": 3.86,
+  "elapsed_seconds": 5.51
+}

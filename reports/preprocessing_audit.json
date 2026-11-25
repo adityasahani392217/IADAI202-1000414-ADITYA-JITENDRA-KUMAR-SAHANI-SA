@@ -1,0 +1,12 @@
+{
+  "source_file": "Hospital_Inpatient_Discharges__SPARCS_De-Identified___2021_20231012.csv",
+  "initial_rows": 2101588,
+  "exact_duplicates_removed": 7104,
+  "invalid_numeric_rows_dropped": 0,
+  "final_rows": 2094484,
+  "los_topcoded_120plus_count": 1559,
+  "newborn_admissions_count": 202985,
+  "los_iqr_outlier_count": 207955,
+  "parquet_size_mb": 84.66,
+  "elapsed_seconds": 48.69
+}

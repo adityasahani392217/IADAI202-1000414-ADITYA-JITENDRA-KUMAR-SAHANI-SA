@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Large raw datasets (excluded from GitHub due to size limits and data governance)
+*.csv
+!data/aggregates/*.csv
+data/raw/
+data/processed/*.parquet
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Testing & OS
+.pytest_cache/
+catboost_info/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
