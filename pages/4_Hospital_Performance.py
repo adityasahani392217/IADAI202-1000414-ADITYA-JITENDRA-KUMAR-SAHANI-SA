@@ -6,7 +6,7 @@ import plotly.express as px
 import streamlit as st
 
 if not st.session_state.get("_nav_shell_active"):
-    st.set_page_config(page_title="Hospital Performance | MediScope AI", page_icon="🏥", layout="wide")
+    st.set_page_config(page_title="Hospital Performance | MediScope AI", page_icon="assets/mediscope_icon.svg", layout="wide")
 
 from src.config import PALETTE
 from src.dashboard_state import get_page_context, get_preaggregated_table

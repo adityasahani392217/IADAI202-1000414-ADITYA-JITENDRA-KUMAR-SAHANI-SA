@@ -7,7 +7,7 @@ import plotly.express as px
 import streamlit as st
 
 if not st.session_state.get("_nav_shell_active"):
-    st.set_page_config(page_title="ML Performance | MediScope AI", page_icon="📈", layout="wide")
+    st.set_page_config(page_title="ML Performance | MediScope AI", page_icon="assets/mediscope_icon.svg", layout="wide")
 
 from src.config import MODELS_DIR, PALETTE
 from src.prediction import load_model_metadata

@@ -93,15 +93,15 @@ def render_home_page() -> None:
     st.markdown("### Explore Platform Modules")
     col_a, col_b = st.columns(2)
     with col_a:
-        st.page_link("pages/1_Overview.py", label="1. Executive Overview — Key Hospital Metrics & Summary", icon="📊")
-        st.page_link("pages/2_Diagnosis_Analytics.py", label="2. Diagnosis Analytics — Longest Stays & Top Conditions", icon="🩺")
-        st.page_link("pages/3_Financial_Analytics.py", label="3. Financial Analytics — Charges by Severity, Age & Gender", icon="💳")
-        st.page_link("pages/4_Hospital_Performance.py", label="4. Hospital Performance — Facility × County Stay Heatmap", icon="🏥")
+        st.page_link("pages/1_Overview.py", label="1. Executive Overview — Key Hospital Metrics & Summary", icon=":material/bar_chart:")
+        st.page_link("pages/2_Diagnosis_Analytics.py", label="2. Diagnosis Analytics — Longest Stays & Top Conditions", icon=":material/medical_services:")
+        st.page_link("pages/3_Financial_Analytics.py", label="3. Financial Analytics — Charges by Severity, Age & Gender", icon=":material/payments:")
+        st.page_link("pages/4_Hospital_Performance.py", label="4. Hospital Performance — Facility × County Stay Heatmap", icon=":material/local_hospital:")
     with col_b:
-        st.page_link("pages/5_Payment_Analytics.py", label="5. Payment Analytics — Insurance Mix & Payer Costs", icon="🧾")
-        st.page_link("pages/6_Length_of_Stay.py", label="6. Length of Stay — Stay Duration Curve & Severity Breakdown", icon="⏱️")
-        st.page_link("pages/7_ML_Performance.py", label="7. ML Performance — Model Accuracy, Residuals & Fairness", icon="📈")
-        st.page_link("pages/8_LOS_Predictor.py", label="8. Length of Stay Predictor — Interactive Bed-Day Forecast", icon="🤖")
+        st.page_link("pages/5_Payment_Analytics.py", label="5. Payment Analytics — Insurance Mix & Payer Costs", icon=":material/receipt_long:")
+        st.page_link("pages/6_Length_of_Stay.py", label="6. Length of Stay — Stay Duration Curve & Severity Breakdown", icon=":material/schedule:")
+        st.page_link("pages/7_ML_Performance.py", label="7. ML Performance — Model Accuracy, Residuals & Fairness", icon=":material/monitoring:")
+        st.page_link("pages/8_LOS_Predictor.py", label="8. Length of Stay Predictor — Interactive Bed-Day Forecast", icon=":material/model_training:")
 
     st.markdown(
         """
@@ -127,15 +127,15 @@ def main() -> None:
     apply_global_filters(df, mode)
 
     pages = [
-        st.Page(render_home_page, title="Home", icon="🏠", default=True),
-        st.Page("pages/1_Overview.py", title="1. Executive Overview", icon="📊"),
-        st.Page("pages/2_Diagnosis_Analytics.py", title="2. Diagnosis Analytics", icon="🩺"),
-        st.Page("pages/3_Financial_Analytics.py", title="3. Financial Analytics", icon="💳"),
-        st.Page("pages/4_Hospital_Performance.py", title="4. Hospital Performance", icon="🏥"),
-        st.Page("pages/5_Payment_Analytics.py", title="5. Payment Analytics", icon="🧾"),
-        st.Page("pages/6_Length_of_Stay.py", title="6. Length of Stay", icon="⏱️"),
-        st.Page("pages/7_ML_Performance.py", title="7. ML Performance", icon="📈"),
-        st.Page("pages/8_LOS_Predictor.py", title="8. LOS Predictor", icon="🤖"),
+        st.Page(render_home_page, title="Home", icon=":material/home:", default=True),
+        st.Page("pages/1_Overview.py", title="1. Executive Overview", icon=":material/bar_chart:"),
+        st.Page("pages/2_Diagnosis_Analytics.py", title="2. Diagnosis Analytics", icon=":material/medical_services:"),
+        st.Page("pages/3_Financial_Analytics.py", title="3. Financial Analytics", icon=":material/payments:"),
+        st.Page("pages/4_Hospital_Performance.py", title="4. Hospital Performance", icon=":material/local_hospital:"),
+        st.Page("pages/5_Payment_Analytics.py", title="5. Payment Analytics", icon=":material/receipt_long:"),
+        st.Page("pages/6_Length_of_Stay.py", title="6. Length of Stay", icon=":material/schedule:"),
+        st.Page("pages/7_ML_Performance.py", title="7. ML Performance", icon=":material/monitoring:"),
+        st.Page("pages/8_LOS_Predictor.py", title="8. LOS Predictor", icon=":material/model_training:"),
     ]
     nav = st.navigation(pages)
     nav.run()

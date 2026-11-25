@@ -5,7 +5,7 @@ from __future__ import annotations
 import streamlit as st
 
 if not st.session_state.get("_nav_shell_active"):
-    st.set_page_config(page_title="Length of Stay | MediScope AI", page_icon="⏱️", layout="wide")
+    st.set_page_config(page_title="Length of Stay | MediScope AI", page_icon="assets/mediscope_icon.svg", layout="wide")
 
 from src.dashboard_state import (
     get_full_eda_summary,

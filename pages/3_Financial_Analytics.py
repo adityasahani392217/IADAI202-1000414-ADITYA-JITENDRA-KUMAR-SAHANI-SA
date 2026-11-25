@@ -5,7 +5,7 @@ from __future__ import annotations
 import streamlit as st
 
 if not st.session_state.get("_nav_shell_active"):
-    st.set_page_config(page_title="Financial Analytics | MediScope AI", page_icon="💳", layout="wide")
+    st.set_page_config(page_title="Financial Analytics | MediScope AI", page_icon="assets/mediscope_icon.svg", layout="wide")
 
 from src.dashboard_state import get_page_context, get_preaggregated_table
 from src.eda import summarize_age_gender, summarize_payment, summarize_severity

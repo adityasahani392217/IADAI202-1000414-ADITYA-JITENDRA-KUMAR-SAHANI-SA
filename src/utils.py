@@ -256,9 +256,15 @@ def render_plain_english_guide(heading: str, body: str) -> None:
 
 
 def render_active_filter_banner(summary_text: str | None) -> None:
-    """Display an explicit banner when global sidebar filters are narrowing the view."""
+    """Display an explicit banner with an inline SVG filter icon when global filters are active."""
     if summary_text:
+        filter_svg = (
+            '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" '
+            'fill="none" stroke="#92400E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" '
+            'style="vertical-align:-2px; margin-right:6px;">'
+            '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>'
+        )
         st.markdown(
-            f'<div class="filter-banner">🔎 <strong>Active Global Filters:</strong> {summary_text}</div>',
+            f'<div class="filter-banner">{filter_svg}<strong>Active Global Filters:</strong> {summary_text}</div>',
             unsafe_allow_html=True,
         )
